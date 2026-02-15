@@ -116,6 +116,8 @@ function toCheckupInsert(checkup: ParsedHealthCheckup): HealthCheckupInsert {
   };
 }
 
+import { getRequestContext } from "@cloudflare/next-on-pages";
+
 export async function POST(request: Request) {
   const rawBody = (await request.json()) as unknown;
   if (!isExcelImportBody(rawBody)) {
@@ -146,7 +148,21 @@ export async function POST(request: Request) {
   });
   const deduplicatedPatients = Array.from(deduplicatedMap.values());
 
-  if (!hasSupabaseEnv()) {
+  // Cloudflare Edge Runtime Env check
+  let envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  let envKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  try {
+    const cf = getRequestContext();
+    if (cf && cf.env) {
+      envUrl = envUrl || (cf.env as any).NEXT_PUBLIC_SUPABASE_URL;
+      envKey = envKey || (cf.env as any).NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    }
+  } catch (e) {
+    // getRequestContext might fail locally or in non-cf environments
+  }
+
+  if (!hasSupabaseEnv(envUrl, envKey)) {
     return NextResponse.json({
       ok: true,
       dry_run: true,
@@ -166,7 +182,7 @@ export async function POST(request: Request) {
     });
   }
 
-  const supabase = getSupabaseServerClient();
+  const supabase = getSupabaseServerClient(envUrl, envKey);
   const chartNumbers = Array.from(
     new Set(deduplicatedPatients.map((item) => item.chart_number)),
   );

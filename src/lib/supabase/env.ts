@@ -1,5 +1,6 @@
-export function hasSupabaseEnv() {
+export function hasSupabaseEnv(inputUrl?: string, inputKey?: string) {
   return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    (inputUrl || process.env.NEXT_PUBLIC_SUPABASE_URL) &&
+    (inputKey || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
   );
 }
