@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const runtime = "edge";
 import { completeReminder } from "@/actions/reminders";
 
 type RouteContext = {

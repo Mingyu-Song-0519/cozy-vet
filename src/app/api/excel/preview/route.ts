@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const runtime = "edge";
 import type { ParsedPatient } from "@/types/patient";
 import type { ExcelParseResult } from "@/lib/excel/validators";
 import { getSupabaseServerClient } from "@/lib/supabase/server";

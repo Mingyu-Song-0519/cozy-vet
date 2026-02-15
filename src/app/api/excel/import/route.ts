@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const runtime = "edge";
 import type { ExcelParseResult } from "@/lib/excel/validators";
 import type { Database } from "@/lib/supabase/types";
 import type { ParsedHealthCheckup, ParsedPatient } from "@/types/patient";

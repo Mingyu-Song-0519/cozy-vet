@@ -6,6 +6,8 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { AppToaster } from "@/components/common/app-toaster";
 import "./globals.css";
 
+export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: "Cozy Animal Medical Center",
   description: "코지동물의료센터 업무 자동화",

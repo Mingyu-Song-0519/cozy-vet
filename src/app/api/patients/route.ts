@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const runtime = "edge";
 import { z } from "zod";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 import { buildRemindersForPatient } from "@/lib/reminders/scheduler";

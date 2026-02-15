@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const runtime = "edge";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -33,7 +35,7 @@ export async function GET(request: Request) {
     const items = id
       ? fallbackItems.filter((item) => item.id === id)
       : q
-      ? fallbackItems.filter((item) => {
+        ? fallbackItems.filter((item) => {
           const keyword = q.toLowerCase();
           return (
             item.chart_number.toLowerCase().includes(keyword) ||
@@ -41,7 +43,7 @@ export async function GET(request: Request) {
             item.pet_name.toLowerCase().includes(keyword)
           );
         })
-      : fallbackItems;
+        : fallbackItems;
 
     return NextResponse.json({
       ok: true,
