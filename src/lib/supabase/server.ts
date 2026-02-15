@@ -1,6 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/types";
-import { fetch } from "undici";
 
 function getRequiredEnv(name: string) {
   const value = process.env[name];
@@ -19,10 +18,8 @@ export function getSupabaseServerClient() {
       auth: {
         persistSession: false,
       },
-      global: {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        fetch: fetch as any,
-      },
+      // Edge Runtime 환경에서는 global fetch가 기본 사용되므로 명시적 설정 불필요
+      // 필요한 경우 global: { fetch: fetch } 사용 가능
     },
   );
 }
