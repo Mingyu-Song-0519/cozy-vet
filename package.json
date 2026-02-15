@@ -1,0 +1,42 @@
+{
+  "name": "vet-automation-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "verify": "npm run test && npm run lint && npm run build",
+    "verify:full": "npm run test:coverage && npm run lint && npm run build"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.564.0",
+    "next": "^15.5.12",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-hook-form": "^7.71.1",
+    "recharts": "^3.7.0",
+    "sonner": "^2.0.7",
+    "undici": "^7.22.0",
+    "xlsx": "^0.18.5",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^4.0.18",
+    "eslint": "^9",
+    "eslint-config-next": "^15.5.12",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.0.18"
+  }
+}
