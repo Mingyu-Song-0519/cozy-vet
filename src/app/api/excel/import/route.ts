@@ -155,10 +155,12 @@ export async function POST(request: Request) {
   try {
     const cf = getRequestContext();
     if (cf && cf.env) {
-      envUrl = envUrl || (cf.env as any).NEXT_PUBLIC_SUPABASE_URL;
-      envKey = envKey || (cf.env as any).NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const cfEnv = cf.env as any;
+      envUrl = envUrl || cfEnv.NEXT_PUBLIC_SUPABASE_URL;
+      envKey = envKey || cfEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY;
     }
-  } catch (e) {
+  } catch {
     // getRequestContext might fail locally or in non-cf environments
   }
 
