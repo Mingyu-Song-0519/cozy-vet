@@ -20,6 +20,7 @@ export function getSupabaseServerClient() {
         persistSession: false,
       },
       global: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         fetch: fetch as any,
       },
     },
